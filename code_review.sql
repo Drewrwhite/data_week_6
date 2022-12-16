@@ -35,3 +35,7 @@ SELECT SUM(num_parts) FROM sets WHERE year >= 2000;
 
 -- Show the average number of parts for sets that came out since the year 2000.
 SELECT AVG(num_parts) FROM sets WHERE year >= 2000;
+
+-- Using GROUP BY, show the average number of parts for each theme_id in sets.
+SELECT AVG(num_parts), theme_id FROM sets GROUP BY theme_id;
+
