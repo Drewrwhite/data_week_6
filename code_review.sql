@@ -39,3 +39,10 @@ SELECT AVG(num_parts) FROM sets WHERE year >= 2000;
 -- Using GROUP BY, show the average number of parts for each theme_id in sets.
 SELECT AVG(num_parts), theme_id FROM sets GROUP BY theme_id;
 
+-- Joins
+-- Using a free-form join (where the JOIN type isn't specified, equivalent to an inner join), join the parts and part_categories tables. 
+-- Filter for values where the part_categories id matches the parts part_cat_id, and where the name of the part contains the word 'Werewolf'.
+SELECT * FROM parts
+JOIN part_categories
+ON part_cat_id = id
+WHERE parts.name LIKE '%Werewolf%';
