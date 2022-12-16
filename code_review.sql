@@ -17,3 +17,8 @@ SELECT name FROM sets WHERE theme_id IN (SELECT id FROM themes WHERE name LIKE '
 -- select the ids of the values in the inventories table that have more than one version (i.e. version > 1). This is your subquery.
 -- Then select everything from the inventory_parts table where the inventory_id matches an id in that subquery. Limit the output to 10 rows.
 SELECT * FROM inventory_parts WHERE inventory_id IN (SELECT id FROM inventories WHERE version > 1);
+
+-- Manipulate values in SELECT
+-- Aliasing the sets table as 's', select the year and name of the values in that table that include the substring 'Batman'. 
+-- Concatenate three exclamation marks to the end of each name, and make all the names upper case.
+SELECT CONCAT(UPPER(name), '!!!'), year FROM sets AS s WHERE name LIKE '%Batman%';
