@@ -6,3 +6,5 @@ SELECT name, num_parts FROM sets WHERE name LIKE '%Hair%' ORDER BY num_parts DES
 -- From the sets table, select all the sets that included the word 'Showdown' in the name between 1990 and 2015
 SELECT * FROM sets WHERE name LIKE '%Showdown%' AND year BETWEEN 1990 AND 2015;
 
+-- Aliasing the part_categories table as p, show the id and name of the values in that table where the name includes the word 'Bricks'
+SELECT id, name FROM part_categories AS p WHERE name LIKE '%Bricks%';
