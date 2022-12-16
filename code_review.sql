@@ -22,3 +22,6 @@ SELECT * FROM inventory_parts WHERE inventory_id IN (SELECT id FROM inventories 
 -- Aliasing the sets table as 's', select the year and name of the values in that table that include the substring 'Batman'. 
 -- Concatenate three exclamation marks to the end of each name, and make all the names upper case.
 SELECT CONCAT(UPPER(name), '!!!'), year FROM sets AS s WHERE name LIKE '%Batman%';
+
+-- For every quantity value greater than 1 in the inventory_parts table, double the value of the quantity. Limit your output to 20 rows, and order it by quantity.
+SELECT quantity * 2 FROM inventory_parts WHERE quantity > 1 ORDER BY quantity DESC LIMIT 20;
