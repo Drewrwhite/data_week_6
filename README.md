@@ -1,117 +1,77 @@
-# Code Review: Team Week
+# Code Review: SQL
 
-#### By Ruben Giosa, Alejandro Socarras, Drew White
+#### By Drew White
 
-#### This repo includes exercises for working with datasets using pandas working as a team. 
+#### Code Review - Demonstrating use of SQL to perform various queries that include: Selecting values, Sub-queries, Manipulating values, Aggregation functions, and Joins. 
 
 <br>
 
 ## Technologies Used
 
-* Python
-* Pandas
-* GeoPandas
-* Matplot
-* Folium
-* Git
-* Markdown
-* JSON
-* NumPy
-* `.gitignore`
-* `requirements.txt`
-  
-</br>
-
-## Datasets Used
-
-1. [USA Real Estate Data](https://www.kaggle.com/datasets/ahmedshahriarsakib/usa-real-estate-dataset)
-2. [Global Cost of Living](https://www.kaggle.com/datasets/mvieira101/global-cost-of-living)
-3. [World Happiness Report 2021](https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2021)
-4. [World Happiness Ranking](https://www.kaggle.com/datasets/anamvillalpando/world-happiness-ranking)
+* SQL
+* MySQL
+* MariaDB
+* Beekeeper
+* Docker
 
 </br>
 
 ## Description
 
-This repo includes data manipulation for datasets working with a team. Alejandro performed profiling, cleaning and transformations on the [Global Cost of Living](https://www.kaggle.com/datasets/mvieira101/global-cost-of-living), and exported to a clean version of the csv named `cost_living.csv`. Drew worked on profiling, cleaning and transformations for the [World Happiness Report 2021](https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2021) and [World Happiness Ranking](https://www.kaggle.com/datasets/anamvillalpando/world-happiness-ranking) data sets to merge into `world_happiness_clean.csv`. Ruben performed profiling, cleaning and transformations on the [USA Real Estate Data](https://www.kaggle.com/datasets/ahmedshahriarsakib/usa-real-estate-dataset) to compile `clean_realtor_data.csv`, and then joined the other contributors' datasets into one consolidated csv file. The realtor and cost of living data were concatenated in order to expand the data set for price per square meter data at the city level. Then that expanded data (`cost_living_with_realtor.csv`) set was merged with `world_happiness_clean.csv` into the consolidated `cl_real_happiness.csv`.
+Selecting Values
+- Select the name and `part_num` columns from the `parts` table. Show only names that include the substring 'Hair', and order them with the `part_num` in descending order
 
-Once the datasets were cleaned and consolidated, the team created (and in some cases recreated) data visualizations and analysis using `cl_real_happiness.csv`. In the `rg_maps.ipynb` notebook is a geo heat map of life expectancy by country that was put together by Ruben. Below is the output of the visualization:
+- From the `sets` table, select all the sets that included the word 'Showdown' in the name between 1990 and 2015
 
-<br>
+- Aliasing the `part_categories` table as `p`, show the id and name of the values in that table where the name includes the word 'Bricks'
 
-![life_exp_map.png](./images/life_exp_map.png)
+Sub-queries
+- Select all the ids from the `themes` table with 'Pirates' or 'Star Wars' in the name. This is your sub-query. Then show the names of all the `sets` where the `theme_id` matches an id in that sub-query.
 
-Drew put together a pie chart highlighting the life expectancy for the top 10 countries. Code for the visualization is located in `dw.ipynb`. Below is the pie chart:
+- Select the ids of the values in the `inventories` table that have more than one version (i.e. `version > 1`). This is your sub-query. Then select everything from the `inventory_parts` table where the `inventory_id` matches an id in that sub-query. Limit the output to 10 rows.
 
-<br>
+Manipulate Values in Select
+- Aliasing the `sets` table as `s`, select the year and name of the values in that table that include the substring 'Batman'. Concatenate three exclamation marks to the end of each name, and make all the names upper case.
 
-![lifeexpectancy.png](./images/lifeexpectancy.png)
+- For every quantity value greater than 1 in the `inventory_parts` table, double the value of the quantity. Limit your output to 20 rows, and order it by quantity.
 
-Drew also put together a line graph highlighting the happiness score for the top 10 countries. Interesting note is there seems to be correlation between Happiness and Life Expectancy with the two showing the same exact top ten countries. Code for the visualization is located in `dw.ipynb`. Below is the line chart:
+Aggregation Functions
+- Count the total number of transparent colors in the `colors` table (Note: `is_trans` is a binary value, and you want to show how many rows there are where it equals 1).
 
-<br>
+- Show the sum of all the parts for all the `sets` that came out since the year 2000.
 
-![worldhappiness2021.png](./images/worldhappiness2021.png)
+- Show the average number of parts for `sets` that came out since the year 2000.
 
-<br>
+- Using `GROUP BY`, show the average number of parts for each `theme_id` in sets.
 
-Drew compiled a map highlighting the happiness score for all countries as well as a map showing the corruption rate by country. Code for the visualization is located in `dw.ipynb`. Below is the output of the visualization:
-
-![happiness_geo_heat.png](./images/happiness_geo_heat.png)
-
-<br>
-
-![happiness_geo_heat.png](./images/corruption_by_country_dw.png)
-
-<br>
-
-Alejandro put together a map visualization using Folium, that shows the average price per square meter by state. Code for the visualization is located in `alex_work.ipynb`. Below is a snapshot of the visualization, as it is a dynamic map so in the notebook you can zoom in and out:
-
-![p_per_sq.png](./images/p_per_sq_meter.png)
-
-Alejandro also used geopandas to create a similar map on a global scale: 
-
-!['p_per_sq_meter_global2.png'](./images/p_per_sq_meter_global2.png)
-
-Ruben created a scatter plot visualization that shows the average price per square meter against life expectancy and social support, for 10 countries with the highest life expectancy. Code for the visualization is located in `rg_scatter.ipynb`. Below is a snapshot of the visualization:
-
-![scatter_plot.png](./images/scatter_plot.png)
-
-Overall, the team was able to limit the amount of merge conflicts by working on independent notebooks and assigning different tasks (e.g. Each focused on different data sets, Ruben completed README, etc.). One challenge that we underwent was version control for the datasets that were transformed and then needed to be leveraged by the broader group. One key learning we had was going forward a good practice to help mitigate this is to spend time as a group validating the final data set, agree its ready to be leveraged, and then go on to begin our data visualizations and exploration. This would prevent having version control issues and digging through code to ensure its reading from proper csv files.
+Joins
+- Using a free-form join (where the JOIN type isn't specified, equivalent to an inner join), join the`parts` and `part_categories` tables. Filter for values where the `part_categories` id matches the `parts` `part_cat_id`, and where the name of the part contains the word 'Werewolf'.
 
 ## Setup/Installation Requirements
 
-* Go to https://github.com/apsocarras/team-week.git to find the specific repository for this website.
-* Then open your terminal. I recommend going to your Desktop directory:
-    ```bash
-    cd Desktop
-    ```
-* Then clone the repository by inputting: 
+* Clone by inputting following into terminal: 
   ```bash
-  git clone https://github.com/apsocarras/team-week.git
+  git clone https://github.com/Drewrwhite/data_week_6.git
   ```
-* Go to the new directory or open the directory folder on your desktop:
+* Navigate to directory:
   ```bash
-  cd python-team-week
+  cd <directory>
   ```
-* Once in the directory you will need to set up a virtual environment in your terminal:
-  ```bash
-  python3.7 -m venv venv
-  ```
-* Then activate the environment:
-  ```bash
-  source venv/bin/activate
-  ```
-* Install the necessary items with requirements.txt:
-  ```bash
-    pip install -r requirements.txt
-  ```
-* Download the necessary csv files listed in the Datasets Used section
-* Download the cleaned up csv files created by the contributors on this [google drive](https://drive.google.com/drive/folders/1lq9CVXbi3C3INEUpxUeNBACZHR3vWxhE)
-* One all csv data sets have been added to the data folder in this directory, you can open it
-* With your virtual environment now enabled with proper requirements, open the directory:
+* Open directory in VSCode:
   ```bash
   code .
+  ```
+  * Initiate connection to MariaDB:
+  ```bash
+  ./start_db.sh
+  ```
+  * Connect to MariaDB:
+  ```bash
+  ./connect_db.sh
+  ```
+  * Verify connection with:
+  ```bash
+  docker ps
   ```
 </br>
 
@@ -125,7 +85,7 @@ Overall, the team was able to limit the amount of merge conflicts by working on 
 
 MIT License
 
-Copyright (c) 2022 Ruben Giosa, Alejandro Socarras, Drew White
+Copyright (c) 2022 Drew White
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
