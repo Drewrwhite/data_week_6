@@ -25,3 +25,7 @@ SELECT CONCAT(UPPER(name), '!!!'), year FROM sets AS s WHERE name LIKE '%Batman%
 
 -- For every quantity value greater than 1 in the inventory_parts table, double the value of the quantity. Limit your output to 20 rows, and order it by quantity.
 SELECT quantity * 2 FROM inventory_parts WHERE quantity > 1 ORDER BY quantity DESC LIMIT 20;
+
+-- Aggregation functions
+-- Count the total number of transparent colors in the colors table (Note: is_trans is a binary value, and you want to show how many rows there are where it equals 1).
+SELECT COUNT(is_trans) FROM colors WHERE is_trans = 1;
