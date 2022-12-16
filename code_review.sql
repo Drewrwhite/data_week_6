@@ -29,3 +29,6 @@ SELECT quantity * 2 FROM inventory_parts WHERE quantity > 1 ORDER BY quantity DE
 -- Aggregation functions
 -- Count the total number of transparent colors in the colors table (Note: is_trans is a binary value, and you want to show how many rows there are where it equals 1).
 SELECT COUNT(is_trans) FROM colors WHERE is_trans = 1;
+
+-- Show the sum of all the parts for all the sets that came out since the year 2000.
+SELECT SUM(num_parts) FROM sets WHERE year >= 2000;
