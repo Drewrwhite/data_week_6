@@ -73,6 +73,10 @@ Joins
   ```bash
   docker ps
   ```
+  * When done:
+  ```bash
+  ./stop_db.sh
+  ```
 </br>
 
 ## Known Bugs
