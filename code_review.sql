@@ -32,3 +32,6 @@ SELECT COUNT(is_trans) FROM colors WHERE is_trans = 1;
 
 -- Show the sum of all the parts for all the sets that came out since the year 2000.
 SELECT SUM(num_parts) FROM sets WHERE year >= 2000;
+
+-- Show the average number of parts for sets that came out since the year 2000.
+SELECT AVG(num_parts) FROM sets WHERE year >= 2000;
